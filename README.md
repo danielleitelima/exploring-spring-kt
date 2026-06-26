@@ -4,49 +4,50 @@ The objective of this project is to showcase the implementation and setup of use
 
 To do so, several proof-of-concept branches will be created, each focusing on a single technical concern.
 
-- initial
+### Branch structure
+
+- main
     - layered-architecture
-        - controller
+        - minio
             - multipart-upload
-            - testing-mockmvc
-            - openapi-swagger
+        - testing-mockmvc
+        - openapi-swagger
         - security
             - testing-security
         - couchbase
             - n1ql-queries
             - testcontainers
             - document-versioning
-    - minio
     - actuator-logging
     - webflux-coroutines
         - spring-events
     - redis
     - kafka
-    - docker-compose
+    - docker
+
 
 ### Branch descriptions
 
 | Branch | What it explores |
 |--------|-----------------|
-| `initial` | Bare Spring Boot + Kotlin; Gradle Kotlin DSL, health endpoint sanity check |
-| `initial>layered-architecture` | Package structure: controller / service / repository / domain layers; sample end-to-end flow with an in-memory store |
-| `layered-architecture>controller` | REST endpoints: request/response DTOs, Bean Validation, global `@ExceptionHandler`, error envelope |
-| `controller>multipart-upload` | `@RequestPart` multipart endpoint for file upload; content-type validation, size limits |
-| `controller>testing-mockmvc` | MockMvc + MockK + JUnit 5: controller layer unit tests, request builders, response assertions |
-| `controller>openapi-swagger` | SpringDoc OpenAPI 3 + Swagger UI: schema annotations, bearer auth config, tag grouping |
+| `main` | Bare Spring Boot + Kotlin; Gradle Kotlin DSL, health endpoint sanity check |
+| `main>layered-architecture` | Package structure: controller / service / repository / domain layers; sample end-to-end flow with an in-memory store |
+| `layered-architecture>minio` | Minio S3-compatible client: bucket initialisation, object upload/download, pre-signed URL generation |
+| `minio>multipart-upload` | `@RequestPart` multipart endpoint for file upload; content-type validation, size limits |
+| `layered-architecture>testing-mockmvc` | MockMvc + MockK + JUnit 5: controller layer unit tests, request builders, response assertions |
+| `layered-architecture>openapi-swagger` | SpringDoc OpenAPI 3 + Swagger UI: schema annotations, bearer auth config, tag grouping |
 | `layered-architecture>security` | Spring Security filter chain + JWT: issue, validate, and refresh tokens; route protection |
 | `security>testing-security` | `@WithMockUser`, mock JWT filter in `@WebMvcTest`, secured endpoint integration tests |
 | `layered-architecture>couchbase` | Spring Data Couchbase: connection config, `@Document` entity, `CouchbaseRepository` CRUD |
 | `couchbase>n1ql-queries` | Custom `@Query` N1QL statements: filtering, sorting, cursor-based pagination, index hints |
 | `couchbase>testcontainers` | Testcontainers Couchbase module: bucket bootstrap, full repository integration tests against a real DB in Docker |
 | `couchbase>document-versioning` | Schema evolution strategy: `schemaVersion` field, read-time migration adapter, batch N1QL migration script |
-| `initial>minio` | Minio S3-compatible client: bucket initialisation, object upload/download, pre-signed URL generation |
-| `initial>actuator-logging` | Spring Actuator health/metrics/info endpoints + Logback JSON structured logging with MDC correlation IDs |
-| `initial>webflux-coroutines` | Spring WebFlux reactive stack with Kotlin coroutines: `suspend` controllers, `Flow` responses, `coRouter` |
+| `main>actuator-logging` | Spring Actuator health/metrics/info endpoints + Logback JSON structured logging with MDC correlation IDs |
+| `main>webflux-coroutines` | Spring WebFlux reactive stack with Kotlin coroutines: `suspend` controllers, `Flow` responses, `coRouter` |
 | `webflux-coroutines>spring-events` | `ApplicationEventPublisher` with coroutine-aware `@EventListener`: fire-and-forget async side-effects |
-| `initial>redis` | Spring Data Redis: `RedisTemplate`, hash/string operations, TTL-based key expiry; use case — refresh token store and JWT blacklist for logout |
-| `initial>kafka` | Spring Kafka: producer/consumer setup, topic config, `@KafkaListener`, error handling, dead-letter topic |
-| `initial>docker-compose` | `docker-compose.yml` bringing up Couchbase + Minio + Redis + Kafka with bootstrap scripts and health checks |
+| `main>redis` | Spring Data Redis: `RedisTemplate`, hash/string operations, TTL-based key expiry; use case — refresh token store and JWT blacklist for logout |
+| `main>kafka` | Spring Kafka: producer/consumer setup, topic config, `@KafkaListener`, error handling, dead-letter topic |
+| `main>docker` | `docker-compose.yml` bringing up Couchbase + Minio + Redis + Kafka with bootstrap scripts and health checks |
 
 ## Project setup
 
