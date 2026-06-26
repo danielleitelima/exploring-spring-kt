@@ -1,5 +1,0 @@
-### Hello default
-GET http://localhost:8080/api/hello
-
-### Hello with name
-GET http://localhost:8080/api/hello?name=Daniel
