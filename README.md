@@ -8,21 +8,22 @@ To do so, several proof-of-concept branches will be created, each focusing on a 
 
 - [x] main
     - [x] layered-architecture
-        - [ ] validation
+        - [x] validation
         - [x] openapi-swagger
-        - [ ] actuator-logging
+        - [x] logging
+            - [x] actuator
         - [ ] security
             - [ ] testing-security
         - [x] couchbase
             - [ ] n1ql-queries
             - [ ] testcontainers
             - [ ] document-versioning
-        - [ ] postgres
-        - [ ] minio
+        - [x] postgres
+        - [x] minio
         - [ ] redis
         - [ ] kafka
         - [ ] testing-mockmvc
-    - [ ] docker
+    - [x] docker
 
 
 ### Branch descriptions
@@ -33,7 +34,8 @@ To do so, several proof-of-concept branches will be created, each focusing on a 
 | `main>layered-architecture` | Package structure: controller / service / repository / domain layers; sample end-to-end flow with an in-memory store |
 | `layered-architecture>validation` | Bean Validation (`@Valid`, `@NotBlank`, custom `@Constraint`): request body validation, field-level error messages, global `@ExceptionHandler` for `MethodArgumentNotValidException` |
 | `layered-architecture>openapi-swagger` | SpringDoc OpenAPI 3 + Swagger UI: schema annotations, bearer auth config, tag grouping |
-| `layered-architecture>actuator-logging` | Spring Actuator health/metrics/info endpoints + Logback JSON structured logging with MDC correlation IDs |
+| `layered-architecture>logging` | Logback JSON structured logging with MDC correlation IDs |
+| `logging>actuator` | Spring Actuator health/metrics/info endpoints |
 | `layered-architecture>security` | Spring Security filter chain + JWT: issue, validate, and refresh tokens; route protection |
 | `security>testing-security` | `@WithMockUser`, mock JWT filter in `@WebMvcTest`, secured endpoint integration tests |
 | `layered-architecture>couchbase` | Spring Data Couchbase: connection config, `@Document` entity, `CouchbaseRepository` CRUD |
