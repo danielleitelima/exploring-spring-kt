@@ -37,3 +37,5 @@ out/
 .kotlin
 
 .DS_Store
+
+.env

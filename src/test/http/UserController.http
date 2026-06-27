@@ -24,3 +24,14 @@ GET http://localhost:8080/api/users/{{userId}}
 
 ### Get user by unknown id — expect 404
 GET http://localhost:8080/api/users/non-existing-id
+
+### Upload profile picture — replace {{userId}} with an id from the create response
+POST http://localhost:8080/api/users/7abd3e94-4a1c-4d56-b796-fb9fa71197d4/profile-picture
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="file"; filename="avatar.png"
+Content-Type: image/png
+
+< ./asset/avatar.png
+--boundary--
