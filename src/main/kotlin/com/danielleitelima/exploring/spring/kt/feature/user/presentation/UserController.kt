@@ -3,6 +3,7 @@ package com.danielleitelima.exploring.spring.kt.feature.user.presentation
 import com.danielleitelima.exploring.spring.kt.feature.user.domain.model.User
 import com.danielleitelima.exploring.spring.kt.feature.user.domain.service.UserNotFoundException
 import com.danielleitelima.exploring.spring.kt.feature.user.domain.service.UserService
+import org.slf4j.Logger
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/users")
-class UserController(private val service: UserService) {
+class UserController(
+    private val service: UserService,
+    private val logger: Logger,
+) {
 
     data class CreateUserRequest(val name: String, val email: String)
 
@@ -37,8 +41,10 @@ class UserController(private val service: UserService) {
     }
 
     @ExceptionHandler(UserNotFoundException::class)
-    fun handleNotFound(ex: UserNotFoundException): ResponseEntity<ErrorResponse> =
-        ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(ex.message ?: "Not found"))
+    fun handleNotFound(ex: UserNotFoundException): ResponseEntity<ErrorResponse> {
+        logger.warn("User not found error={}", ex.message)
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorResponse(ex.message ?: "Not found"))
+    }
 
     private fun User.toResponse() = UserResponse(id = id, name = name, email = email)
 }

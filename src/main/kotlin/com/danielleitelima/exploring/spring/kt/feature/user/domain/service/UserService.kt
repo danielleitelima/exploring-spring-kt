@@ -2,6 +2,7 @@ package com.danielleitelima.exploring.spring.kt.feature.user.domain.service
 
 import com.danielleitelima.exploring.spring.kt.feature.user.domain.model.User
 import com.danielleitelima.exploring.spring.kt.feature.user.domain.repository.UserRepository
+import org.slf4j.Logger
 import org.springframework.stereotype.Service
 import java.util.UUID
 
@@ -12,16 +13,26 @@ interface UserService {
 }
 
 @Service
-class UserServiceImpl(private val repository: UserRepository) : UserService {
+class UserServiceImpl(
+    private val repository: UserRepository,
+    private val logger: Logger,
+) : UserService {
 
-    override fun getAll(): List<User> = repository.findAll()
+    override fun getAll(): List<User> {
+        logger.debug("Fetching all users")
+        return repository.findAll()
+    }
 
-    override fun getById(id: String): User =
-        repository.findById(id) ?: throw UserNotFoundException(id)
+    override fun getById(id: String): User {
+        logger.debug("Fetching user id={}", id)
+        return repository.findById(id) ?: throw UserNotFoundException(id)
+    }
 
     override fun create(name: String, email: String): User {
         val user = User(id = UUID.randomUUID().toString(), name = name, email = email)
-        return repository.save(user)
+        repository.save(user)
+        logger.info("User created id={}", user.id)
+        return user
     }
 }
 

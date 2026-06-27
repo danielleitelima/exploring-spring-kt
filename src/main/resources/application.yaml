@@ -1,3 +1,11 @@
 spring:
   application:
     name: spring.kt
+
+logging:
+  structured:
+    format:
+      console: ecs
+  level:
+    root: INFO
+    com.danielleitelima: DEBUG
