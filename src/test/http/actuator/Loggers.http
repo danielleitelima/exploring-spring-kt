@@ -1,0 +1,23 @@
+### List all loggers and their current levels
+GET http://localhost:8080/actuator/loggers
+
+### Get the level of a specific logger
+GET http://localhost:8080/actuator/loggers/com.danielleitelima
+
+### Set log level to DEBUG at runtime — no restart required
+POST http://localhost:8080/actuator/loggers/com.danielleitelima
+Content-Type: application/json
+
+{"configuredLevel": "DEBUG"}
+
+### Set log level to TRACE for deeper inspection
+POST http://localhost:8080/actuator/loggers/com.danielleitelima
+Content-Type: application/json
+
+{"configuredLevel": "TRACE"}
+
+### Reset to the default level configured in application.yaml
+POST http://localhost:8080/actuator/loggers/com.danielleitelima
+Content-Type: application/json
+
+{"configuredLevel": null}

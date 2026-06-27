@@ -1,0 +1,2 @@
+### Health — overall status and component details
+GET http://localhost:8080/actuator/health

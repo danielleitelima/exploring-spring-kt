@@ -1,0 +1,11 @@
+### List all available metric names
+GET http://localhost:8080/actuator/metrics
+
+### JVM heap memory used
+GET http://localhost:8080/actuator/metrics/jvm.memory.used?tag=area:heap
+
+### Total HTTP server requests served
+GET http://localhost:8080/actuator/metrics/http.server.requests
+
+### HTTP requests filtered by outcome
+GET http://localhost:8080/actuator/metrics/http.server.requests?tag=outcome:SUCCESS

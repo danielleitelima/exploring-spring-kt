@@ -1,0 +1,2 @@
+### Info — application metadata (build version, git commit, etc.)
+GET http://localhost:8080/actuator/info

@@ -2,6 +2,15 @@ spring:
   application:
     name: spring.kt
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,loggers,metrics
+  endpoint:
+    health:
+      show-details: always
+
 logging:
   structured:
     format:
