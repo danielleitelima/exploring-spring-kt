@@ -1,51 +1,7 @@
 ## Exploring Spring
 
-The objective of this project is to showcase the implementation and setup of useful techniques and technologies using the Spring framework.
+This branch implements the Dockerfile, allowing the Spring application to be easily deployed in a Docker container.
 
-To do so, several proof-of-concept branches will be created, each focusing on a single technical concern.
-
-### Branch structure
-
-- [x] main
-    - [x] layered-architecture
-        - [ ] validation
-        - [x] openapi-swagger
-        - [ ] actuator-logging
-        - [ ] security
-            - [ ] testing-security
-        - [x] couchbase
-            - [ ] n1ql-queries
-            - [ ] testcontainers
-            - [ ] document-versioning
-        - [ ] postgres
-        - [ ] minio
-        - [ ] redis
-        - [ ] kafka
-        - [ ] testing-mockmvc
-    - [ ] docker
-
-
-### Branch descriptions
-
-| Branch | What it explores |
-|--------|-----------------|
-| `main` | Bare Spring Boot + Kotlin; Gradle Kotlin DSL, health endpoint sanity check |
-| `main>layered-architecture` | Package structure: controller / service / repository / domain layers; sample end-to-end flow with an in-memory store |
-| `layered-architecture>validation` | Bean Validation (`@Valid`, `@NotBlank`, custom `@Constraint`): request body validation, field-level error messages, global `@ExceptionHandler` for `MethodArgumentNotValidException` |
-| `layered-architecture>openapi-swagger` | SpringDoc OpenAPI 3 + Swagger UI: schema annotations, bearer auth config, tag grouping |
-| `layered-architecture>actuator-logging` | Spring Actuator health/metrics/info endpoints + Logback JSON structured logging with MDC correlation IDs |
-| `layered-architecture>security` | Spring Security filter chain + JWT: issue, validate, and refresh tokens; route protection |
-| `security>testing-security` | `@WithMockUser`, mock JWT filter in `@WebMvcTest`, secured endpoint integration tests |
-| `layered-architecture>couchbase` | Spring Data Couchbase: connection config, `@Document` entity, `CouchbaseRepository` CRUD |
-| `couchbase>n1ql-queries` | Custom `@Query` N1QL statements: filtering, sorting, cursor-based pagination, index hints |
-| `couchbase>testcontainers` | Testcontainers Couchbase module: bucket bootstrap, full repository integration tests against a real DB in Docker |
-| `couchbase>document-versioning` | Schema evolution strategy: `schemaVersion` field, read-time migration adapter, batch N1QL migration script |
-| `layered-architecture>postgres` | Spring Data JPA + PostgreSQL: datasource config, `@Entity` mapping, `JpaRepository` CRUD, Flyway migrations |
-| `layered-architecture>minio` | Minio S3-compatible client: bucket initialisation, object upload/download, pre-signed URL generation |
-| `layered-architecture>redis` | Spring Data Redis: `RedisTemplate`, hash/string operations, TTL-based key expiry; use case — refresh token store and JWT blacklist for logout |
-| `layered-architecture>kafka` | Spring Kafka: producer/consumer setup, topic config, `@KafkaListener`, error handling, dead-letter topic |
-| `layered-architecture>testing-mockmvc` | MockMvc + MockK + JUnit 5: controller layer unit tests, request builders, response assertions |
-| `main>docker` | `docker-compose.yml` bringing up Couchbase + Minio + Redis + Kafka with bootstrap scripts and health checks |
 
 ## Project setup
 
