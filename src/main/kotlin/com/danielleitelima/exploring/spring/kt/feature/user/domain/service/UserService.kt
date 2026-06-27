@@ -8,7 +8,7 @@ import java.util.UUID
 interface UserService {
     fun getAll(): List<User>
     fun getById(id: String): User
-    fun create(name: String, email: String): User
+    fun create(name: String, email: String, username: String, age: Int): User
 }
 
 @Service
@@ -19,8 +19,8 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
     override fun getById(id: String): User =
         repository.findById(id) ?: throw UserNotFoundException(id)
 
-    override fun create(name: String, email: String): User {
-        val user = User(id = UUID.randomUUID().toString(), name = name, email = email)
+    override fun create(name: String, email: String, username: String, age: Int): User {
+        val user = User(id = UUID.randomUUID().toString(), name = name, email = email, username = username, age = age)
         return repository.save(user)
     }
 }
