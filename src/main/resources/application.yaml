@@ -1,3 +1,10 @@
 spring:
   application:
-    name: spring.kt
+    name: ${APP_NAME:spring.kt}
+  couchbase:
+    connection-string: ${COUCHBASE_CONNECTION_STRING:localhost}
+    username: ${COUCHBASE_USERNAME:admin}
+    password: ${COUCHBASE_PASSWORD:password}
+  data:
+    couchbase:
+      bucket-name: ${COUCHBASE_BUCKET_NAME:users}

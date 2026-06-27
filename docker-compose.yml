@@ -1,0 +1,26 @@
+services:
+  couchbase:
+    image: couchbase:enterprise-7.6.3
+    ports:
+      - "8091-8096:8091-8096"
+      - "11210:11210"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8091/pools"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
+    volumes:
+      - couchbase_data:/opt/couchbase/var
+
+  couchbase-init:
+    image: couchbase:enterprise-7.6.3
+    depends_on:
+      couchbase:
+        condition: service_healthy
+    volumes:
+      - ./scripts/init-couchbase.sh:/init-couchbase.sh
+    command: bash /init-couchbase.sh
+
+volumes:
+  couchbase_data:
