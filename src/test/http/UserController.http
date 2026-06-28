@@ -1,5 +1,5 @@
 ### Create user
-POST http://localhost:8080/api/users
+POST https://spring.danielleitelima.com/api/users
 Content-Type: application/json
 
 {
@@ -8,7 +8,7 @@ Content-Type: application/json
 }
 
 ### Create another user
-POST http://localhost:8080/api/users
+POST https://spring.danielleitelima.com/api/users
 Content-Type: application/json
 
 {
@@ -17,10 +17,16 @@ Content-Type: application/json
 }
 
 ### Get all users
-GET http://localhost:8080/api/users
+GET https://spring.danielleitelima.com/api/users
 
 ### Get user by id — replace with an id from the create response
-GET http://localhost:8080/api/users/{{userId}}
+GET hhttps://spring.danielleitelima.com/api/users/{{userId}}
 
 ### Get user by unknown id — expect 404
-GET http://localhost:8080/api/users/non-existing-id
+GET https://spring.danielleitelima.com/api/users/non-existing-id
+
+### Delete user by id — replace with an id from the create response
+DELETE https://spring.danielleitelima.com/api/users/{{userId}}
+
+### Delete user by unknown id — expect 404
+DELETE https://spring.danielleitelima.com/api/users/non-existing-id

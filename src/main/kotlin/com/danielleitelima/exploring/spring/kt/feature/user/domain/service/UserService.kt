@@ -9,6 +9,7 @@ interface UserService {
     fun getAll(): List<User>
     fun getById(id: String): User
     fun create(name: String, email: String): User
+    fun delete(id: String)
 }
 
 @Service
@@ -22,6 +23,11 @@ class UserServiceImpl(private val repository: UserRepository) : UserService {
     override fun create(name: String, email: String): User {
         val user = User(id = UUID.randomUUID().toString(), name = name, email = email)
         return repository.save(user)
+    }
+
+    override fun delete(id: String) {
+        repository.findById(id) ?: throw UserNotFoundException(id)
+        repository.deleteById(id)
     }
 }
 

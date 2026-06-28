@@ -5,6 +5,7 @@ import com.danielleitelima.exploring.spring.kt.feature.user.domain.service.UserN
 import com.danielleitelima.exploring.spring.kt.feature.user.domain.service.UserService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -34,6 +35,12 @@ class UserController(private val service: UserService) {
     fun create(@RequestBody request: CreateUserRequest): ResponseEntity<UserResponse> {
         val user = service.create(request.name, request.email)
         return ResponseEntity.status(HttpStatus.CREATED).body(user.toResponse())
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: String): ResponseEntity<Void> {
+        service.delete(id)
+        return ResponseEntity.noContent().build()
     }
 
     @ExceptionHandler(UserNotFoundException::class)

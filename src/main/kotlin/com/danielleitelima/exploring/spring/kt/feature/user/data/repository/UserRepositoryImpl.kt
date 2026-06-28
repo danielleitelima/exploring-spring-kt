@@ -20,6 +20,8 @@ class UserRepositoryImpl(
         return user
     }
 
+    override fun deleteById(id: String) = userDataSource.deleteById(id)
+
     private fun UserDocument.toDomain() = User(id = id, name = name, email = email)
 
     private fun User.toDocument() = UserDocument(id = id, name = name, email = email)
