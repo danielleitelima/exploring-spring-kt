@@ -1,26 +1,19 @@
 services:
-  couchbase:
-    image: couchbase:enterprise-7.6.3
+  mongodb:
+    image: mongo:7.0
     ports:
-      - "8091-8096:8091-8096"
-      - "11210:11210"
+      - "27017:27017"
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:8091/pools"]
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
       interval: 5s
       timeout: 3s
       retries: 20
       start_period: 10s
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
-      - couchbase_data:/opt/couchbase/var
-
-  couchbase-init:
-    image: couchbase:enterprise-7.6.3
-    depends_on:
-      couchbase:
-        condition: service_healthy
-    volumes:
-      - ./scripts/init-couchbase.sh:/init-couchbase.sh
-    command: bash /init-couchbase.sh
+      - mongodb_data:/data/db
 
 volumes:
-  couchbase_data:
+  mongodb_data:

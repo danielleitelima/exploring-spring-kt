@@ -1,6 +1,6 @@
 ## Exploring Spring
 
-This branch showcases the setup of Couchbase as a data source.
+This branch showcases the setup of MongoDB as a data source.
 
 ## Project setup
 
